@@ -78,9 +78,12 @@ export default function App() {
   return (
     <main className="app">
       <header className="encabezado">
-        <div>
-          <h1>🚤 LanchaYa Iquitos</h1>
-          <p>Salidas de lanchas y rápidos desde Iquitos</p>
+        <div className="marca">
+          <img className="logo" src="/lanchaya-logo.svg" alt="" />
+          <div>
+            <h1>LanchaYa Iquitos</h1>
+            <p>Salidas de lanchas y rápidos desde Iquitos</p>
+          </div>
         </div>
         <button className="btn-primario" type="button" onClick={() => abrirFormulario()}>
           + Nueva salida
