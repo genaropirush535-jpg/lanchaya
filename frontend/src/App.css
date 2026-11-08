@@ -38,6 +38,8 @@ header p { margin: 4px 0 20px; color: #555; }
 .campos-form { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
 .campos-form label { display: flex; flex-direction: column; gap: 5px; font-size: .9rem; color: #555; }
 .campos-form input, .campos-form select { box-sizing: border-box; width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 8px; background: #fff; color: #222; }
+.campos-form [aria-invalid="true"] { border-color: #c92a2a; }
+.error-campo { color: #a61e1e; font-size: .8rem; }
 .acciones-form, .acciones-card { display: flex; gap: 8px; margin-top: 14px; }
 .acciones-card { border-top: 1px solid #eee; padding-top: 12px; }
 .mensaje.exito { background: #d3f9d8; color: #216e39; }

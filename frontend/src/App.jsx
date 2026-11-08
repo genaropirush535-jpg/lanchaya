@@ -22,7 +22,7 @@ export default function App() {
     getDestinos()
       .then(setDestinos)
       .catch(() => setError('No se pudieron cargar los destinos. Revisa que el backend esté encendido.'));
-  }, []);
+  }, [revision]);
 
   useEffect(() => {
     getSalidas(filtros)
@@ -49,6 +49,7 @@ export default function App() {
       setNotificacion('La salida se actualizó correctamente.');
     } else {
       await crearSalida(datos);
+      setDestinos((actuales) => [...new Set([...actuales, datos.destino])].sort());
       setNotificacion('La salida se creó correctamente.');
     }
 

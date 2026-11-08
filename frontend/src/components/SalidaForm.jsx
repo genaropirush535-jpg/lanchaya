@@ -26,13 +26,34 @@ export default function SalidaForm({ salida, onGuardar, onCancelar }) {
   const [datos, setDatos] = useState(() => convertirFormulario(salida));
   const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState('');
+  const [erroresCampos, setErroresCampos] = useState({});
 
   const cambiar = (evento) => {
     setDatos((actuales) => ({ ...actuales, [evento.target.name]: evento.target.value }));
+    setErroresCampos((actuales) => ({ ...actuales, [evento.target.name]: '' }));
+    setError('');
   };
 
   const enviar = async (evento) => {
     evento.preventDefault();
+    const errores = {};
+    for (const campo of ['empresa', 'destino', 'puerto', 'fechaHora']) {
+      if (!datos[campo].trim()) errores[campo] = 'Este campo es obligatorio.';
+    }
+    if (!datos.precio || Number(datos.precio) <= 0) {
+      errores.precio = 'El precio debe ser mayor que 0.';
+    }
+    if (datos.fechaHora) {
+      const fecha = new Date(datos.fechaHora);
+      if (Number.isNaN(fecha.getTime())) {
+        errores.fechaHora = 'Ingresa una fecha y hora válidas.';
+      } else if (!salida && fecha < new Date()) {
+        errores.fechaHora = 'No puede estar en el pasado.';
+      }
+    }
+    setErroresCampos(errores);
+    if (Object.keys(errores).length) return;
+
     setGuardando(true);
     setError('');
 
@@ -51,13 +72,14 @@ export default function SalidaForm({ salida, onGuardar, onCancelar }) {
   };
 
   return (
-    <form className="salida-form" onSubmit={enviar}>
+    <form className="salida-form" onSubmit={enviar} noValidate>
       <h2>{salida ? 'Editar salida' : 'Nueva salida'}</h2>
 
       <div className="campos-form">
         <label>
           Empresa
-          <input name="empresa" value={datos.empresa} onChange={cambiar} required />
+          <input name="empresa" value={datos.empresa} onChange={cambiar} aria-invalid={Boolean(erroresCampos.empresa)} aria-describedby={erroresCampos.empresa ? 'error-empresa' : undefined} />
+          {erroresCampos.empresa && <span className="error-campo" id="error-empresa">{erroresCampos.empresa}</span>}
         </label>
         <label>
           Embarcación
@@ -73,11 +95,13 @@ export default function SalidaForm({ salida, onGuardar, onCancelar }) {
         </label>
         <label>
           Destino
-          <input name="destino" value={datos.destino} onChange={cambiar} required />
+          <input name="destino" value={datos.destino} onChange={cambiar} aria-invalid={Boolean(erroresCampos.destino)} aria-describedby={erroresCampos.destino ? 'error-destino' : undefined} />
+          {erroresCampos.destino && <span className="error-campo" id="error-destino">{erroresCampos.destino}</span>}
         </label>
         <label>
           Puerto
-          <input name="puerto" value={datos.puerto} onChange={cambiar} required />
+          <input name="puerto" value={datos.puerto} onChange={cambiar} aria-invalid={Boolean(erroresCampos.puerto)} aria-describedby={erroresCampos.puerto ? 'error-puerto' : undefined} />
+          {erroresCampos.puerto && <span className="error-campo" id="error-puerto">{erroresCampos.puerto}</span>}
         </label>
         <label>
           Fecha y hora
@@ -86,8 +110,10 @@ export default function SalidaForm({ salida, onGuardar, onCancelar }) {
             name="fechaHora"
             value={datos.fechaHora}
             onChange={cambiar}
-            required
+            aria-invalid={Boolean(erroresCampos.fechaHora)}
+            aria-describedby={erroresCampos.fechaHora ? 'error-fechaHora' : undefined}
           />
+          {erroresCampos.fechaHora && <span className="error-campo" id="error-fechaHora">{erroresCampos.fechaHora}</span>}
         </label>
         <label>
           Duración (horas)
@@ -109,8 +135,10 @@ export default function SalidaForm({ salida, onGuardar, onCancelar }) {
             step="0.01"
             value={datos.precio}
             onChange={cambiar}
-            required
+            aria-invalid={Boolean(erroresCampos.precio)}
+            aria-describedby={erroresCampos.precio ? 'error-precio' : undefined}
           />
+          {erroresCampos.precio && <span className="error-campo" id="error-precio">{erroresCampos.precio}</span>}
         </label>
         <label>
           Cupos
