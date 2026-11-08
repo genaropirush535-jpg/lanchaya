@@ -24,3 +24,24 @@ header p { margin: 4px 0 20px; color: #555; }
 .filtros select, .filtros input { padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 8px; background: #fff; color: #222; }
 .btn-limpiar { padding: 10px; font-size: 1rem; border: none; border-radius: 8px; background: #1f6feb; color: #fff; cursor: pointer; }
 .btn-limpiar:disabled { background: #b8c2cc; cursor: not-allowed; }
+
+.encabezado { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 18px; }
+.encabezado p { margin-bottom: 0; }
+.btn-primario, .btn-secundario, .btn-eliminar { padding: 10px 14px; border: 0; border-radius: 8px; font-size: .95rem; cursor: pointer; }
+.btn-primario { background: #1f6feb; color: #fff; }
+.btn-secundario { background: #e9ecef; color: #222; }
+.btn-eliminar { background: #ffe3e3; color: #a61e1e; }
+.btn-primario:disabled, .btn-secundario:disabled { opacity: .65; cursor: not-allowed; }
+
+.salida-form { background: #fff; padding: 18px; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.salida-form h2 { margin: 0 0 14px; }
+.campos-form { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.campos-form label { display: flex; flex-direction: column; gap: 5px; font-size: .9rem; color: #555; }
+.campos-form input, .campos-form select { box-sizing: border-box; width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 8px; background: #fff; color: #222; }
+.acciones-form, .acciones-card { display: flex; gap: 8px; margin-top: 14px; }
+.acciones-card { border-top: 1px solid #eee; padding-top: 12px; }
+.mensaje.exito { background: #d3f9d8; color: #216e39; }
+
+@media (max-width: 520px) {
+  .encabezado { align-items: flex-start; flex-direction: column; }
+}

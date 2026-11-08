@@ -8,7 +8,7 @@ function formatear(fechaHora) {
   };
 }
 
-export default function SalidaCard({ salida }) {
+export default function SalidaCard({ salida, onEditar, onEliminar }) {
   const { fecha, hora } = formatear(salida.fechaHora);
 
   return (
@@ -24,6 +24,14 @@ export default function SalidaCard({ salida }) {
       <p>📍 {salida.puerto}</p>
       <p>🕐 {fecha}, {hora} · {salida.duracionHoras} h de viaje</p>
       <p className="precio">S/ {salida.precio}</p>
+      <div className="acciones-card">
+        <button className="btn-secundario" type="button" onClick={() => onEditar(salida)}>
+          Editar
+        </button>
+        <button className="btn-eliminar" type="button" onClick={() => onEliminar(salida)}>
+          Eliminar
+        </button>
+      </div>
     </article>
   );
 }
