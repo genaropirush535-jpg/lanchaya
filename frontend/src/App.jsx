@@ -79,7 +79,7 @@ export default function App() {
     <main className="app">
       <header className="encabezado">
         <div className="marca">
-          <img className="logo" src="/lanchaya-logo.svg" alt="" />
+          <span className="logo" aria-hidden="true">🚤</span>
           <div>
             <h1>LanchaYa Iquitos</h1>
             <p>Salidas de lanchas y rápidos desde Iquitos</p>
