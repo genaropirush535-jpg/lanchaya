@@ -3,7 +3,7 @@
 Aplicación web donde las empresas fluviales registran sus salidas (lanchas, rápidos y deslizadores) y los pasajeros las consultan y filtran por destino, fecha y tipo de embarcación.
 
 ## Integrantes
-- Christian Arévalo Jesús
+- Christian Genaro Jesús
 
 ## Tecnologías
 - **Backend:** Node.js + Express 4, persistencia en archivo JSON
